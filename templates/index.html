@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Shorts Maker</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#151d32;--muted:#aab6d0;--line:#2a3652;--accent:#8b5cf6;--cyan:#22d3ee}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1b2450 0,#0b1020 55%);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#f8fafc;min-height:100vh;padding:22px}
+main{max-width:760px;margin:0 auto}.brand{display:flex;gap:12px;align-items:center;margin:8px 0 26px}.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,var(--accent),var(--cyan));display:grid;place-items:center;font-size:24px;font-weight:900}
+h1{font-size:clamp(28px,6vw,42px);line-height:1.1;margin:0}.sub{color:var(--muted);margin:8px 0 22px}.card{background:rgba(21,29,50,.94);border:1px solid var(--line);border-radius:22px;padding:22px;margin:16px 0;box-shadow:0 20px 50px #0003}
+label{display:block;font-weight:700;margin:15px 0 8px}input[type=file],input[type=url],select{width:100%;padding:14px;border-radius:12px;border:1px solid #3b4968;background:#0c1428;color:#fff;font-size:15px}
+small,.muted{color:var(--muted);line-height:1.5}.or{text-align:center;color:var(--muted);margin:12px}.btn{width:100%;border:0;border-radius:13px;padding:15px 18px;margin-top:20px;background:linear-gradient(90deg,var(--accent),#6366f1);color:#fff;font-size:16px;font-weight:800;cursor:pointer}.btn:active{transform:scale(.99)}.alert{padding:13px 15px;border-radius:12px;background:#7f1d1d;color:#fee2e2;margin:15px 0;overflow-wrap:anywhere}.success{background:#123b35;border:1px solid #23796a;padding:16px;border-radius:14px;margin-top:16px}.download{display:inline-block;margin-top:12px;color:#06131a;background:var(--cyan);font-weight:800;padding:12px 16px;border-radius:10px;text-decoration:none}.pill{display:inline-block;padding:6px 10px;border:1px solid #3b4968;border-radius:999px;color:#c4b5fd;font-size:12px;margin:4px 4px 0 0}.note{font-size:13px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:540px){body{padding:14px}.card{padding:17px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<div class="brand"><div class="logo">▶</div><div><h1>Free Shorts Maker</h1><div class="muted">Long video se chhote clips · Mobile friendly</div></div></div>
+<p class="sub">Apna video upload karein ya YouTube link paste karein. Tool video ko chune gaye duration ke clips mein kaat kar ZIP bana dega.</p>
+<div class="card">
+{% if error %}<div class="alert"><strong>Processing error:</strong><br>{{ error }}</div>{% endif %}
+<form method="post" enctype="multipart/form-data">
+<div class="grid"><div><label for="video">📱 Mobile se video upload</label><input id="video" name="video" type="file" accept="video/*"><small>MP4, MOV, MKV, WEBM · server limit ke andar</small></div>
+<div><label for="youtube_url">▶ YouTube link</label><input id="youtube_url" name="youtube_url" type="url" placeholder="https://youtu.be/..." autocomplete="url"><small>Sirf wahi video process karein jiske liye aapke paas permission ho.</small></div></div>
+<div class="or">— video upload ya link mein se ek —</div>
+<label for="clip_length">✂️ Har clip ki length</label><select id="clip_length" name="clip_length"><option value="15">15 seconds</option><option value="30" selected>30 seconds</option><option value="45">45 seconds</option><option value="60">60 seconds</option></select>
+<button class="btn" type="submit">✨ Create clips</button>
+</form>
+{% if result_url %}<div class="success"><strong>✅ Clips ready!</strong><p>{{ clip_count }} clips ban gaye (har clip lagbhag {{ clip_length }} seconds, aakhri clip chhoti ho sakti hai).</p><a class="download" href="{{ result_url }}">⬇ Download all clips (ZIP)</a></div>{% endif %}
+</div>
+<div class="card"><h3>Is free version mein</h3><span class="pill">Video upload</span><span class="pill">YouTube URL</span><span class="pill">15–60 sec clips</span><span class="pill">ZIP download</span><p class="note muted">Yeh starter version clips ko duration ke hisaab se kaat-ta hai; abhi AI highlights, auto captions aur automatic 9:16 reframing nahi karta. Hosting ki free limits ho sakti hain. Processing temporary server storage use karti hai.</p></div>
+<p class="note muted">Privacy: uploaded videos processing ke liye server par temporarily store hote hain. Public deployment se pehle private hosting, file limits, cleanup, and access controls configure karein.</p>
+</main></body></html>
