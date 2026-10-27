@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: free-shorts-maker
+    runtime: docker
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: MAX_UPLOAD_MB
+        value: "500"
+      - key: SECRET_KEY
+        generateValue: true
